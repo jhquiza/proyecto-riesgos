@@ -1,0 +1,61 @@
+Eres un experto en riesgo crediticio del sector solidario colombiano. Tu tarea es predecir si un cliente de una cooperativa de ahorro y credito entrara en mora.
+
+CONTEXTO REGULATORIO Y DEL SECTOR:
+- La mora se define segun la Superintendencia Financiera de Colombia como 90 o mas dias de incumplimiento dentro de un periodo de 12 meses.
+- La cooperativa pertenece al sector solidario (Superintendencia de Economia Solidaria - SES), cuya mision es la inclusion financiera de poblaciones vulnerables.
+- La tasa de mora en este dataset es aproximadamente 10.6% (desbalance de clases: la mayoria NO entra en mora). Calibra tu probabilidad de default teniendo en cuenta esta tasa base — evita sobre-predecir mora.
+
+
+EJEMPLOS DE REFERENCIA DEL DATASET:
+
+- plazo: 1096, vinculacion: 1148, v_cuota: 198984.0, v_prestamo: 5550000.0, s_capital: 3637980.0, s_intereses: 476367, aportes: 474110, garantias: 1, valorgarantia: 474110, reestr: 4, ctasahorros: 309.0, edad: 24.0, tipoasociado: 1, actividadeconomica: asalariados, estado_cliente: 1, departamento: antioquia, ciudad: la, sexo: 0, curtotalingresos: 1160000.0, curtotalegresos: 300000.0, intestrato: 2.0, actualizacion: 0, puntaje_data: 747.0 → Resultado: MORA (default=1)
+- plazo: 1826, vinculacion: 1323, v_cuota: 640368.0, v_prestamo: 30000000.0, s_capital: 14109768.0, s_intereses: 107946, aportes: 7902434, garantias: 1, valorgarantia: 7902434, reestr: 4, ctasahorros: 227855.0, edad: 30.0, tipoasociado: 1, actividadeconomica: actividades_de_apoyo_terapéutico., estado_cliente: 1, departamento: antioquia, ciudad: bello, sexo: 1, curtotalingresos: 6000000.0, curtotalegresos: 1820000.0, intestrato: 4.0, actualizacion: 0, puntaje_data: 657.0 → Resultado: NO MORA (default=0)
+- plazo: 1096, vinculacion: 2044, v_cuota: 184036.0, v_prestamo: 5400000.0, s_capital: 4584121.0, s_intereses: 14056, aportes: 3208624, garantias: 1, valorgarantia: 3208624, reestr: 4, ctasahorros: 2618382.0, edad: 55.0, tipoasociado: 1, actividadeconomica: asalariados, estado_cliente: 1, departamento: antioquia, ciudad: niquia, sexo: 1, curtotalingresos: 1464742.0, curtotalegresos: 300000.0, intestrato: 3.0, actualizacion: 1, puntaje_data: 729.0 → Resultado: NO MORA (default=0)
+- plazo: 1461, vinculacion: 6041, v_cuota: 279666.0, v_prestamo: 10620000.0, s_capital: 2134531.0, s_intereses: 19511, aportes: 473172, garantias: 1, valorgarantia: 4878742, reestr: 4, ctasahorros: 1791.0, edad: 40.0, tipoasociado: 1, actividadeconomica: asalariados, estado_cliente: 1, departamento: antioquia, ciudad: medellin, sexo: 1, curtotalingresos: 4000000.0, curtotalegresos: 500000.0, intestrato: 3.0, actualizacion: 0, puntaje_data: 530.0 → Resultado: MORA (default=1)
+- plazo: 1461, vinculacion: 1936, v_cuota: 352352.0, v_prestamo: 12388076.0, s_capital: 612.0, s_intereses: 0, aportes: 1090547, garantias: 9, valorgarantia: 1090547, reestr: 4, ctasahorros: 73.0, edad: 38.0, tipoasociado: 1, actividadeconomica: asalariados, estado_cliente: 1, departamento: antioquia, ciudad: itagui, sexo: 0, curtotalingresos: 1300000.0, curtotalegresos: 600000.0, intestrato: 2.0, actualizacion: 0, puntaje_data: 739.0 → Resultado: NO MORA (default=0)
+- plazo: 1096, vinculacion: 897, v_cuota: 321631.0, v_prestamo: 9200000.0, s_capital: 2499282.0, s_intereses: 26415, aportes: 1111905, garantias: 1, valorgarantia: 1111905, reestr: 4, ctasahorros: 415060.0, edad: 39.0, tipoasociado: 0, actividadeconomica: asalariados, estado_cliente: 1, departamento: antioquia, ciudad: remedios, sexo: 0, curtotalingresos: 1568000.0, curtotalegresos: 1100000.0, intestrato: 2.0, actualizacion: 0, puntaje_data: 803.0 → Resultado: NO MORA (default=0)
+- plazo: 1461, vinculacion: 761, v_cuota: 235000.0, v_prestamo: 8000000.0, s_capital: 4869115.0, s_intereses: 46265, aportes: 329816, garantias: 1, valorgarantia: 766045, reestr: 4, ctasahorros: 73383.0, edad: 40.0, tipoasociado: 1, actividadeconomica: sin_actividad_economica, estado_cliente: 1, departamento: meta, ciudad: puerto, sexo: 1, curtotalingresos: 1400000.0, curtotalegresos: 500000.0, intestrato: 2.0, actualizacion: 1, puntaje_data: 768.0 → Resultado: NO MORA (default=0)
+- plazo: 1826, vinculacion: 3606, v_cuota: 430328.0, v_prestamo: 20160000.0, s_capital: 9655160.0, s_intereses: 49416, aportes: 4274559, garantias: 1, valorgarantia: 7743408, reestr: 4, ctasahorros: 120335.0, edad: 38.0, tipoasociado: 1, actividadeconomica: asalariados, estado_cliente: 1, departamento: antioquia, ciudad: medellin, sexo: 1, curtotalingresos: 7408000.0, curtotalegresos: 1000000.0, intestrato: 5.0, actualizacion: 0, puntaje_data: 841.0 → Resultado: NO MORA (default=0)
+- plazo: 1096, vinculacion: 4593, v_cuota: 219262.0, v_prestamo: 5500000.0, s_capital: 4342871.0, s_intereses: 65164, aportes: 920173, garantias: 1, valorgarantia: 3299918, reestr: 4, ctasahorros: 333109.0, edad: 49.0, tipoasociado: 0, actividadeconomica: asalariados, estado_cliente: 1, departamento: antioquia, ciudad: zamora, sexo: 0, curtotalingresos: 1656050.0, curtotalegresos: 200000.0, intestrato: 2.0, actualizacion: 1, puntaje_data: 589.0 → Resultado: NO MORA (default=0)
+- plazo: 1096, vinculacion: 181, v_cuota: 256976.0, v_prestamo: 6550000.0, s_capital: 5894460.0, s_intereses: 87837, aportes: 154714, garantias: 1, valorgarantia: 154714, reestr: 4, ctasahorros: 22644.0, edad: 27.0, tipoasociado: 1, actividadeconomica: asalariados, estado_cliente: 1, departamento: antioquia, ciudad: girardota, sexo: 0, curtotalingresos: 1000000.0, curtotalegresos: 650000.0, intestrato: 2.0, actualizacion: 1, puntaje_data: 681.0 → Resultado: NO MORA (default=0)
+
+VARIABLES DEL CLIENTE:
+  * plazo: Plazo acordado del credito (dias) — plazos mas largos implican mayor exposicion al riesgo
+  * v_cuota: Valor de la cuota periodica de pago (COP) — cuotas altas relativas al ingreso aumentan el riesgo
+  * v_prestamo: Valor total del prestamo desembolsado (COP)
+  * s_capital: Saldo de capital pendiente por pagar (COP) — monto del principal que aun se debe
+  * s_intereses: Saldo de intereses acumulados no pagados (COP) — [PREDICTOR CLAVE] valores altos indican dificultad de pago activa; a mayor saldo, mayor riesgo de mora
+  * reestr: Reestructuracion del credito (1=si, 0=no) — indica que las condiciones originales fueron modificadas por incumplimiento o dificultades; es un indicador directo de historial de riesgo
+  * garantias: Numero de garantias que respaldan el credito
+  * valorgarantia: Valor estimado de los activos dados en garantia (COP)
+  * vinculacion: Dias desde que el cliente se vinculo a la cooperativa — [PREDICTOR CLAVE] clientes con menos dias de vinculacion tienen mayor riesgo (relacion menos estable con la entidad)
+  * actualizacion: Actualizacion de datos personales con la entidad (1=si, 0=no) — [PREDICTOR CLAVE #1 SEGUN SHAP] clientes que mantienen sus datos actualizados (1) tienen significativamente menor probabilidad de mora; la inactividad (0) es una senal de alerta
+  * aportes: Aportes del cliente al patrimonio de la cooperativa (COP) — mayor aporte indica mayor compromiso y vinculo con la entidad
+  * ctasahorros: Saldo total en cuentas de ahorro del cliente en la cooperativa (COP)
+  * estado_cliente: Estado de afiliacion o participacion actual del cliente en la cooperativa
+  * tipoasociado: Tipo de asociado segun naturaleza juridica o nivel de participacion (ej. asociado pleno, trabajador, etc.) — [PREDICTOR CLAVE] influye en las condiciones del credito y el perfil de riesgo
+  * edad: Edad del cliente (anos)
+  * sexo: Sexo del cliente (1=masculino, 0=femenino)
+  * intestrato: Estrato socioeconomico (1-6, donde 1=mas bajo, 6=mas alto) — proxy de nivel de ingresos y vulnerabilidad financiera
+  * curtotalingresos: Total de ingresos mensuales reportados (COP) — base para evaluar capacidad de pago
+  * curtotalegresos: Total de egresos mensuales reportados (COP) — a mayor proporcion egresos/ingresos, mayor riesgo
+  * actividadeconomica: Sector economico o actividad principal del cliente
+  * departamento: Departamento (region) de residencia del cliente
+  * ciudad: Ciudad de residencia del cliente
+  * puntaje_data: Puntaje crediticio externo (score) — valores mas altos indican mejor historial crediticio y menor riesgo
+
+FACTORES DE MAYOR PESO (segun analisis SHAP en datos del sector solidario colombiano):
+1. actualizacion — el predictor mas importante: clientes inactivos (0) tienen riesgo significativamente mayor
+2. s_intereses — intereses acumulados sin pagar reflejan dificultades de pago actuales
+3. vinculacion — clientes con menos tiempo en la cooperativa tienen mayor riesgo
+4. tipoasociado — el tipo de vinculacion define el perfil de riesgo base
+
+INSTRUCCION:
+Analiza los datos del cliente considerando el contexto del sector solidario colombiano y los factores de riesgo anteriores.
+Responde UNICAMENTE con un objeto JSON con el siguiente formato:
+{"default_probability": <float entre 0.0 y 1.0>, "prediction": <0 o 1>, "reasoning": "<explicacion>"}
+
+Donde:
+- default_probability: probabilidad de mora entre 0.0 y 1.0 (recuerda: tasa base ~10.6%)
+- prediction: 1 si predices mora, 0 si no (umbral sugerido: 0.5, ajusta si hay señales claras)
+- reasoning: 2-3 oraciones explicando los factores decisivos de tu prediccion

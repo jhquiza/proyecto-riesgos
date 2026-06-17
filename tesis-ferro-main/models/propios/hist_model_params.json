@@ -1,0 +1,8 @@
+{
+    "histgradientboostingclassifier__early_stopping": true,
+    "histgradientboostingclassifier__l2_regularization": 1.0,
+    "histgradientboostingclassifier__learning_rate": 0.02,
+    "histgradientboostingclassifier__max_iter": 800,
+    "histgradientboostingclassifier__max_leaf_nodes": 31,
+    "histgradientboostingclassifier__min_samples_leaf": 20
+}
