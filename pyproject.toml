@@ -19,7 +19,7 @@ dependencies = [
     "prefect>=3.7.4",
     "pyarrow>=23.0.1",
     "ruff>=0.15.2",
-    "scikit-learn==1.7.2",
+    "scikit-learn==1.8",
     "seaborn>=0.13.2",
     "shap>=0.50.0",
     "skrub>=0.7.1",
